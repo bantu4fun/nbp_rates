@@ -27,6 +27,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'puma'
   gem 'rspec-rails'
+  gem 'transpec'
 end
 group :production do
   gem 'unicorn'
