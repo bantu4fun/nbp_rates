@@ -1,7 +1,7 @@
 class MoneyController < ApplicationController
 
   def index
-    @exchanges = Exchange.all
+    @exchanges = Exchange.all.order(name: :desc)
   end
 
   def show

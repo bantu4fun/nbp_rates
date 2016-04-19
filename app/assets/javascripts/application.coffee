@@ -19,6 +19,6 @@
 #= require_tree .
 
 jQuery ->
-  $('#currencies').DataTable {
+  $('.currencies').DataTable {
     paging: false
   }
