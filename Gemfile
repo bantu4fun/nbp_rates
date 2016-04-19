@@ -16,6 +16,8 @@ gem 'haml-rails'
 gem 'pg'
 gem 'simple_form'
 gem 'sidekiq'
+gem 'kaminari'
+gem 'bootstrap-kaminari-views'
 
 group :development do
   gem 'better_errors'

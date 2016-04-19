@@ -16,8 +16,8 @@
           %tbody#rates_table
             - if @exchanges.present?
               - @exchanges.each do |ex|
-                %tr.clickable{'data-url': money_path(ex)}
+                %tr
                   %td= ex.name
                   %td= link_to 'Show', money_path(ex), :class => 'btn btn-success'
-        / %center
-        /  = will_paginate @exchanges
+        %center
+          = paginate @exchanges, theme: 'twitter-bootstrap-3'

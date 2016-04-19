@@ -17,8 +17,3 @@
 #= require turbolinks
 #= require bootstrap
 #= require_tree .
-
-jQuery ->
-  $('.currencies').DataTable {
-    paging: false
-  }
