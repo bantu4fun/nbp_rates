@@ -2,7 +2,7 @@
   .container
     .row
       .col-xs-2
-      / = link_to 'Refresh rates', refresh_rates_money_index_path, :class => 'btn btn-default', remote: true, method: :post
+      = link_to 'Refresh rates', refresh_rates_money_index_path, :class => 'btn btn-default', method: :post
     %br
     .row
       .col-xs-6
@@ -15,9 +15,9 @@
                 Actions
           %tbody#rates_table
             - if @exchanges.present?
-              - @exchanges.each do |ex|
+              - @exchanges.each do |exchange|
                 %tr
-                  %td= ex.name
-                  %td= link_to 'Show', money_path(ex), :class => 'btn btn-success'
+                  %td= exchange.name
+                  %td= link_to 'Show', money_path(exchange), :class => 'btn btn-success'
         %center
           = paginate @exchanges, theme: 'twitter-bootstrap-3'

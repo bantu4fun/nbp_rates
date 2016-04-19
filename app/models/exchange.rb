@@ -1,5 +1,5 @@
 class Exchange < ActiveRecord::Base
-  has_many :currencies
+  has_many :currencies, dependent: :destroy
 
   def save_current_rates(data)
     return if Exchange.find_by(name: data[:exchanges][:name])

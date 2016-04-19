@@ -18,6 +18,13 @@ class MoneyController < ApplicationController
     #get latest exchange rates and save to db
     #can be helpful: 
     #http://www.nbp.pl/home.aspx?f=/kursy/instrukcja_pobierania_kursow_walut.html
+    if Exchange.new.save_current_rates(XmlParser.new.get_data)
+      flash[:notice] = 'Rates has been updated.'
+      redirect_to money_index_path
+    else
+      flash[:danger] = 'Rates are up-to-date.'
+      redirect_to money_index_path
+    end
   end
 
   def report
