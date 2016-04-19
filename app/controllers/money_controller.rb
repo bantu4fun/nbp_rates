@@ -1,12 +1,16 @@
 class MoneyController < ApplicationController
 
   def index
-    #show list of exchange rates with creation time
-    #don't forget about pagination
+    @exchanges = Exchange.all
   end
 
   def show
-    #show table of currencies for selected exchange rate
+    @exchange = Exchange.find(params[:id])
+    if @exchange
+      @currencies = @exchange.currencies.all
+    else
+      redirect_to money_path
+    end
   end
 
   def refresh_rates
