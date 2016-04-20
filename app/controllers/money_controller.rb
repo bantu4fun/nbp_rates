@@ -22,7 +22,7 @@ class MoneyController < ApplicationController
       flash[:notice] = 'Rates has been updated.'
       redirect_to money_index_path
     else
-      flash[:danger] = 'Rates are up-to-date.'
+      flash[:danger] = 'Rates are up to date.'
       redirect_to money_index_path
     end
   end
@@ -40,25 +40,25 @@ class MoneyController < ApplicationController
     @avg_buy = Currency.where(code: @currency.code).average(:buy_price).round(4)
     @median_buy = Currency.where(code: @currency.code).median(:buy_price)
 
-    @chart_data = [
-      {
-        name: 'Sell price',
-        data: Currency.where(code: @currency.code).last(10).map do |c| 
-            [c.exchange.publication_date.strftime("%d.%m.%Y"), c.send(:sell_price)]
-          end
-      },
-      {
-        name: 'Buy price',
-        data: Currency.where(code: @currency.code).last(10).map do |c|
-            [c.exchange.publication_date.strftime("%d.%m.%Y"), c.send(:buy_price)]
-          end
-      }
-    ]
-
     @min_sell = Currency.where(code: @currency.code).minimum(:sell_price)
     @max_sell = Currency.where(code: @currency.code).maximum(:sell_price)
     @avg_sell = Currency.where(code: @currency.code).average(:sell_price).round(4)
     @median_sell = Currency.where(code: @currency.code).median(:sell_price)
+    
+    @chart_data = [
+      {
+        name: 'Sell price',
+        data: Currency.where(code: @currency.code).map do |c| 
+            [c.exchange.publication_date.strftime("%d.%m.%Y"), c.send(:sell_price)]
+          end.last(10)
+      },
+      {
+        name: 'Buy price',
+        data: Currency.where(code: @currency.code).map do |c|
+            [c.exchange.publication_date.strftime("%d.%m.%Y"), c.send(:buy_price)]
+          end.last(10)
+      }
+    ]
   end
 
 end

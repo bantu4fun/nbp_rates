@@ -16,6 +16,7 @@ gem 'haml-rails'
 gem 'pg'
 gem 'simple_form'
 gem 'sidekiq'
+gem 'sidekiq-cron'
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 gem 'chartkick'
@@ -25,6 +26,7 @@ group :development do
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
   gem 'pry'
   gem 'html2haml'
+  gem 'letter_opener'
   gem 'quiet_assets'
   gem 'rails_layout'
 end
