@@ -33,7 +33,16 @@ class MoneyController < ApplicationController
     #also You can generate a simple chart(use can use some js library)
 
     #this method should be available only for currencies which exist in the database 
-  end
+    @currency = Currency.find(params[:id])
+    @min_buy = Currency.where(code: @currency.code).minimum(:buy_price)
+    @max_buy = Currency.where(code: @currency.code).maximum(:buy_price)
+    @avg_buy = Currency.where(code: @currency.code).average(:buy_price).round(4)
+    @median_buy = Currency.where(code: @currency.code).median(:buy_price)
 
+    @min_sell = Currency.where(code: @currency.code).minimum(:sell_price)
+    @max_sell = Currency.where(code: @currency.code).maximum(:sell_price)
+    @avg_sell = Currency.where(code: @currency.code).average(:sell_price).round(4)
+    @median_sell = Currency.where(code: @currency.code).median(:sell_price)
+  end
 
 end

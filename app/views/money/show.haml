@@ -19,8 +19,8 @@
                 Buy price
               %th.col-xs-1
                 Sell price
-              / %th.col-xs-1
-              /   Actions
+              %th.col-xs-1
+                Actions
           %tbody
             - if @currencies.present?
               - @currencies.each do |c|
@@ -30,4 +30,4 @@
                   %td= c.code
                   %td= c.buy_price
                   %td= c.sell_price
-                  / %td= link_to 'Report', report_money_path(c), :class => 'btn btn-success'
+                  %td= link_to 'Report', report_money_path(c), :class => 'btn btn-success'

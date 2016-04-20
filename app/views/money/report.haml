@@ -1,0 +1,46 @@
+.container
+  .row
+    .col-xs-1
+      = link_to 'Back', money_path(@currency.exchange), :class => 'btn btn-danger' 
+  .row
+    .col-xs-12
+      .row
+        %center.h2 Statistics
+        %table.table.table-striped.table-bordered.table-hover
+          %thead
+            %tr
+              %th.col-xs-2
+                Currency
+              %th.col-xs-1
+                Converter
+              %th.col-xs-1
+                Code
+              %th.col-xs-1
+                Minimum buy price
+              %th.col-xs-1
+                Minimum sell price
+              %th.col-xs-1
+                Maximum buy price
+              %th.col-xs-1
+                Maximum sell price
+              %th.col-xs-1
+                Average buy price
+              %th.col-xs-1
+                Average sell price
+              %th.col-xs-1
+                Median buy price
+              %th.col-xs-1
+                Median sell price
+          %tbody
+            %tr
+              %td= @currency.name
+              %td= @currency.converter
+              %td= @currency.code
+              %td= @min_buy
+              %td= @min_sell
+              %td= @max_buy
+              %td= @max_sell
+              %td= @avg_buy
+              %td= @avg_sell
+              %td= @median_buy
+              %td= @median_sell

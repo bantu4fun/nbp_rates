@@ -2,11 +2,13 @@ class Exchange < ActiveRecord::Base
   has_many :currencies, dependent: :destroy
 
   def save_current_rates(data)
-    return if Exchange.find_by(name: data[:exchanges][:name])
+    exchange = data[:exchanges]
+    
+    return if Exchange.find_by(name: exchange[:name])
 
-    self.name = data[:exchanges][:name]
-    self.quotation_date = data[:exchanges][:quotation_date]
-    self.publication_date = data[:exchanges][:publication_date]
+    self.name = exchange[:name]
+    self.quotation_date = exchange[:quotation_date]
+    self.publication_date = exchange[:publication_date]
     
     data[:currencies].each do |node|
       self.currencies.new(parse_rates(node))
