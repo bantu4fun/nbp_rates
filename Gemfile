@@ -20,6 +20,7 @@ gem 'sidekiq-cron'
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 gem 'chartkick'
+gem 'regressor', '~> 0.6.0'
 
 group :development do
   gem 'better_errors'
@@ -35,7 +36,9 @@ group :development, :test do
   gem 'puma'
   gem 'rspec-rails'
   gem 'transpec'
+  gem 'faker'
 end
+
 group :production do
   gem 'unicorn'
 end

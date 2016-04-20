@@ -7,6 +7,6 @@ FactoryGirl.define do
     code "MyString"
     buy_price 1.5
     sell_price 1.5
-    exchange nil
+    exchange 1
   end
 end
