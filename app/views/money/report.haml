@@ -44,3 +44,5 @@
               %td= @avg_sell
               %td= @median_buy
               %td= @median_sell
+
+  = column_chart @chart_data, library: { title: "Last 10 days sell/buy rates" }

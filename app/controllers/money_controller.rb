@@ -34,10 +34,26 @@ class MoneyController < ApplicationController
 
     #this method should be available only for currencies which exist in the database 
     @currency = Currency.find(params[:id])
+    
     @min_buy = Currency.where(code: @currency.code).minimum(:buy_price)
     @max_buy = Currency.where(code: @currency.code).maximum(:buy_price)
     @avg_buy = Currency.where(code: @currency.code).average(:buy_price).round(4)
     @median_buy = Currency.where(code: @currency.code).median(:buy_price)
+
+    @chart_data = [
+      {
+        name: 'Sell price',
+        data: Currency.where(code: @currency.code).last(10).map do |c| 
+            [c.exchange.publication_date.strftime("%d.%m.%Y"), c.send(:sell_price)]
+          end
+      },
+      {
+        name: 'Buy price',
+        data: Currency.where(code: @currency.code).last(10).map do |c|
+            [c.exchange.publication_date.strftime("%d.%m.%Y"), c.send(:buy_price)]
+          end
+      }
+    ]
 
     @min_sell = Currency.where(code: @currency.code).minimum(:sell_price)
     @max_sell = Currency.where(code: @currency.code).maximum(:sell_price)
