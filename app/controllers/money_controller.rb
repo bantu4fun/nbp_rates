@@ -14,10 +14,6 @@ class MoneyController < ApplicationController
   end
 
   def refresh_rates
-    #for manual refreshing
-    #get latest exchange rates and save to db
-    #can be helpful: 
-    #http://www.nbp.pl/home.aspx?f=/kursy/instrukcja_pobierania_kursow_walut.html
     if Exchange.new.save_current_rates(XmlParser.new.get_data)
       flash[:notice] = 'Rates has been updated.'
       redirect_to money_index_path
@@ -28,37 +24,36 @@ class MoneyController < ApplicationController
   end
 
   def report
-    #generate a report for selected currency
-    #report should show: basic statistics: mean, median, average
-    #also You can generate a simple chart(use can use some js library)
-
-    #this method should be available only for currencies which exist in the database 
     @currency = Currency.find(params[:id])
     
-    @min_buy = Currency.where(code: @currency.code).minimum(:buy_price)
-    @max_buy = Currency.where(code: @currency.code).maximum(:buy_price)
-    @avg_buy = Currency.where(code: @currency.code).average(:buy_price).round(4)
-    @median_buy = Currency.where(code: @currency.code).median(:buy_price)
+    if @currency
+      currency_code = Currency.where(code: @currency.code)
+      @min_buy = currency_code.minimum(:buy_price)
+      @max_buy = currency_code.maximum(:buy_price)
+      @avg_buy = currency_code.average(:buy_price).round(4)
+      @median_buy = currency_code.median(:buy_price)
 
-    @min_sell = Currency.where(code: @currency.code).minimum(:sell_price)
-    @max_sell = Currency.where(code: @currency.code).maximum(:sell_price)
-    @avg_sell = Currency.where(code: @currency.code).average(:sell_price).round(4)
-    @median_sell = Currency.where(code: @currency.code).median(:sell_price)
-    
-    @chart_data = [
-      {
-        name: 'Sell price',
-        data: Currency.where(code: @currency.code).map do |c| 
-            [c.exchange.publication_date.strftime("%d.%m.%Y"), c.send(:sell_price)]
-          end.last(10)
-      },
-      {
-        name: 'Buy price',
-        data: Currency.where(code: @currency.code).map do |c|
-            [c.exchange.publication_date.strftime("%d.%m.%Y"), c.send(:buy_price)]
-          end.last(10)
-      }
-    ]
+      @min_sell = currency_code.minimum(:sell_price)
+      @max_sell = currency_code.maximum(:sell_price)
+      @avg_sell = currency_code.average(:sell_price).round(4)
+      @median_sell = currency_code.median(:sell_price)
+      
+      @chart_data = [
+        {
+          name: 'Sell price',
+          data: currency_code.map do |c| 
+              [c.exchange.publication_date.strftime("%d.%m.%Y"), c.send(:sell_price)]
+            end.last(10)
+        },
+        {
+          name: 'Buy price',
+          data: currency_code.map do |c|
+              [c.exchange.publication_date.strftime("%d.%m.%Y"), c.send(:buy_price)]
+            end.last(10)
+        }
+      ]
+
+    end
   end
-
+  
 end

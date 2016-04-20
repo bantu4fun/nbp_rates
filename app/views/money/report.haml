@@ -1,7 +1,7 @@
 .container
   .row
     .col-xs-1
-      = link_to 'Back', money_path(@currency.exchange), class: 'btn btn-danger' 
+      = link_to 'Back', money_path(@currency.exchange), class: 'btn btn-danger btn-lg' 
   .row
     .col-xs-12
       .row
@@ -45,4 +45,5 @@
               %td= @median_buy
               %td= @median_sell
 
-  = column_chart @chart_data, library: { title: "Last 10 days sell/buy rates" }
+  .row
+    = column_chart @chart_data, library: { title: "Last 10 days sell/buy rates" }

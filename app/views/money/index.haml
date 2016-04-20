@@ -1,8 +1,9 @@
 .col-xs-offset-3
   .container
+    %br
     .row
       .col-xs-2
-      = link_to 'Refresh rates', refresh_rates_money_index_path, :class => 'btn btn-default', method: :post
+      = link_to 'Refresh rates', refresh_rates_money_index_path, class: 'btn btn-default btn-lg', method: :post
     %br
     .row
       .col-xs-6
@@ -10,7 +11,11 @@
           %thead
             %tr
               %th.col-xs-4
-                Date
+                Rates table name
+              %th.col-xs-4
+                Quotation date
+              %th.col-xs-4
+                Publication date
               %th.col-xs-2
                 Actions
           %tbody#rates_table
@@ -18,6 +23,8 @@
               - @exchanges.each do |exchange|
                 %tr
                   %td= exchange.name
-                  %td= link_to 'Show', money_path(exchange), :class => 'btn btn-success'
+                  %td= exchange.quotation_date
+                  %td= exchange.publication_date
+                  %td= link_to 'Show', money_path(exchange), class: 'btn btn-success'
         %center
           = paginate @exchanges, theme: 'twitter-bootstrap-3'

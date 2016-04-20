@@ -2,7 +2,7 @@
   .container
     .row
       .col-xs-2
-        = link_to 'Back', money_index_path, :class => 'btn btn-danger' 
+        = link_to 'Back', money_index_path, class: 'btn btn-danger btn-lg' 
     %br
     .row
       .col-xs-6
@@ -23,11 +23,11 @@
                 Actions
           %tbody
             - if @currencies.present?
-              - @currencies.each do |c|
+              - @currencies.each do |currency|
                 %tr
-                  %td= c.name
-                  %td= c.converter
-                  %td= c.code
-                  %td= c.buy_price
-                  %td= c.sell_price
-                  %td= link_to 'Report', report_money_path(c), :class => 'btn btn-success'
+                  %td= currency.name
+                  %td= currency.converter
+                  %td= currency.code
+                  %td= currency.buy_price
+                  %td= currency.sell_price
+                  %td= link_to 'Report', report_money_path(currency), class: 'btn btn-success'
