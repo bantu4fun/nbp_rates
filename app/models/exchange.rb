@@ -1,6 +1,10 @@
 class Exchange < ActiveRecord::Base
   has_many :currencies, dependent: :destroy
 
+  validates :name, presence: true
+  validates :quotation_date, presence: true
+  validates :publication_date, presence: true
+
   def save_current_rates(data)
     exchange = data[:exchanges]
     
