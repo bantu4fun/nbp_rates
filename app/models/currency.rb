@@ -9,7 +9,6 @@ class Currency < ActiveRecord::Base
   validates :buy_price, numericality: true
   validates :sell_price, presence: true
   validates :sell_price, numericality: true
-  validates :exchange_id, presence: true
 
   def self.median(column_name)
     median_index = (count / 2)
